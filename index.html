@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tuning Thursday - Learning Unplugged</title>
+  <title>Tuning Thursday &quot;Learning Unplugged&quot;</title>
   <style>
     :root { --accent:#0d6efd; --ink:#f9fafb; }
     html, body { height: 100%; margin: 0; }
@@ -40,53 +40,63 @@
     }
     .info h3{ margin:0 0 8px 0; font-size:1rem; }
     .info ul{ margin:0; padding-left:18px; line-height:1.45; font-size:.95rem; }
+    .err { color:#ff6b6b; padding:8px 12px; }
   </style>
 </head>
 <body>
   <div class="app">
-    <header><h1>Tuning Thursday: Learning Unplugged</h1></header>
+    <header><h1>Tuning Thursday &quot;Learning Unplugged&quot;</h1></header>
 
     <div id="map" class="map-wrap">
-      <img class="map-img" src="map.png" alt="Zonal Map" />
-      <a class="zone quadrangle" href="#" data-modal="quadrangle"></a>
-      <a class="zone mph" href="#" data-modal="mph"></a>
-      <a class="zone cafeteria" href="#" data-modal="cafeteria"></a>
-      <a class="zone basketball" href="#" data-modal="basketball"></a>
+      <img class="map-img" src="map.png?v=5" alt="Zonal Map" />
+      <a class="zone quadrangle" href="#" data-modal="quadrangle" aria-label="Open Quadrangle zone"></a>
+      <a class="zone mph" href="#" data-modal="mph" aria-label="Open MPH zone"></a>
+      <a class="zone cafeteria" href="#" data-modal="cafeteria" aria-label="Open Cafeteria zone"></a>
+      <a class="zone basketball" href="#" data-modal="basketball" aria-label="Open Basketball zone"></a>
     </div>
 
     <!-- Basketball -->
-    <div id="basketballModal" class="modal">
+    <div id="basketballModal" class="modal" role="dialog" aria-modal="true">
       <div class="card">
         <div class="ui">
           <button class="btn" data-close>← Back</button>
           <button class="btn" data-close>✕</button>
         </div>
         <header><h2>Basketball Area (Zone C)</h2></header>
-        <figure><img src="basketball.png?v=3" alt="Basketball map"></figure>
+        <figure>
+          <img src="basketball.png?v=5" alt="Basketball map"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'err',innerHTML:'❌ Couldn’t load <code>basketball.png</code>.'}))">
+        </figure>
       </div>
     </div>
 
     <!-- Quadrangle -->
-    <div id="quadrangleModal" class="modal">
+    <div id="quadrangleModal" class="modal" role="dialog" aria-modal="true">
       <div class="card">
         <div class="ui">
           <button class="btn" data-close>← Back</button>
           <button class="btn" data-close>✕</button>
         </div>
         <header><h2>Quadrangle (Zone A)</h2></header>
-        <figure><img src="quadrangle.png?v=3" alt="Quadrangle map"></figure>
+        <figure>
+          <img src="quadrangle.png?v=5" alt="Quadrangle map"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'err',innerHTML:'❌ Couldn’t load <code>quadrangle.png</code>.'}))">
+        </figure>
       </div>
     </div>
 
     <!-- MPH -->
-    <div id="mphModal" class="modal">
+    <div id="mphModal" class="modal" role="dialog" aria-modal="true">
       <div class="card">
         <div class="ui">
           <button class="btn" data-close>← Back</button>
           <button class="btn" data-close>✕</button>
         </div>
         <header><h2>MPH (Zone B)</h2></header>
-        <figure><img src="mph.png?v=3" alt="MPH map"></figure>
+        <figure>
+          <img src="mph.png?v=5" alt="MPH map"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'err',innerHTML:'❌ Couldn’t load <code>mph.png</code>.'}))">
+        </figure>
         <section class="info" aria-label="Live performances">
           <h3>Live Performances — 40 mins showtime <small style="opacity:.8;">(repeated thrice)</small></h3>
           <ul>
@@ -102,14 +112,17 @@
     </div>
 
     <!-- Cafeteria -->
-    <div id="cafeteriaModal" class="modal">
+    <div id="cafeteriaModal" class="modal" role="dialog" aria-modal="true">
       <div class="card">
         <div class="ui">
           <button class="btn" data-close>← Back</button>
           <button class="btn" data-close>✕</button>
         </div>
         <header><h2>Cafeteria (Zone D)</h2></header>
-        <figure><img src="cafeteria.png?v=3" alt="Cafeteria map"></figure>
+        <figure>
+          <img src="cafeteria.png?v=5" alt="Cafeteria map"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'err',innerHTML:'❌ Couldn’t load <code>cafeteria.png</code>.'}))">
+        </figure>
         <section class="info" aria-label="Cafeteria activities">
           <h3>Cafeteria Activities &amp; Stalls</h3>
           <ul>
@@ -134,11 +147,11 @@
   const $$ = s => Array.from(document.querySelectorAll(s));
   $$(".zone").forEach(z => z.addEventListener("click", e => {
     e.preventDefault();
-    document.getElementById(z.dataset.modal+"Modal").style.display = "block";
+    document.getElementById(z.dataset.modal + "Modal").style.display = "block";
   }));
   $$(".modal").forEach(m => {
-    m.addEventListener("click", e => { if(e.target===m) m.style.display="none"; });
-    m.querySelectorAll("[data-close]").forEach(b => b.onclick=()=>m.style.display="none");
+    m.addEventListener("click", e => { if (e.target === m) m.style.display = "none"; });
+    m.querySelectorAll("[data-close]").forEach(b => b.onclick = () => m.style.display = "none");
   });
 </script>
 </body>
